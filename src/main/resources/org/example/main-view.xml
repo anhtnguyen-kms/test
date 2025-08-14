@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="Test"
+      id="MainView.detail">
+    <data>
+        <collection id="glCashAccountingMapDc" class="org.example.Item"/>
+
+<!--        <instance id="glBankCostsTransDc"-->
+<!--                  class="fis.pbcap.finex_common_addon.entity.GlBankCostsTrans">-->
+<!--            <fetchPlan extends="_base">-->
+<!--                <property name="branchCode" fetchPlan="_base"/>-->
+<!--                <property name="channel" fetchPlan="_base"/>-->
+<!--                <property name="ccyCode" fetchPlan="_base"/>-->
+<!--                <property name="glCashAccountingMap" fetchPlan="_base">-->
+<!--                    <property name="glInvoiceInfos" fetchPlan="supplierId_base"/>-->
+<!--                </property>-->
+<!--                <property name="glInvoiceInfo" fetchPlan="_base"/>-->
+<!--                <property name="glAllocateMap" fetchPlan="_base"/>-->
+<!--                <property name="groupCode" fetchPlan="_base"/>-->
+
+<!--            </fetchPlan>-->
+<!--            <loader/>-->
+<!--            <collection id="glCashAccountingMapDc" property="glCashAccountingMap"/>-->
+<!--            <collection id="glAllocateMapDc" property="glAllocateMap"/>-->
+<!--            <collection id="glInvoiceInfoDc" property="glInvoiceInfo"/>-->
+<!--        </instance>-->
+<!--        <collection id="gdBranchesDc" class="fis.pbcap.finex_common_addon.entity.GdBranch">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="gdBranchesDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from GdBranch e where e.status='A' and e.deletedBy is null order by e.branchCode]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+<!--        <collection id="gdChannelDc" class="fis.pbcap.finex_common_addon.entity.GdChannel">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="gdChannelDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from GdChannel e where e.deletedBy is null order by e.channelCode]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+<!--        <collection id="gdCurrencyDc" class="fis.pbcap.finex_common_addon.entity.GdCurrency">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="gdCurrencyDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from GdCurrency e where e.deletedBy is null and e.status='A' order by e.ccyCode]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+<!--        <collection id="gdProductGroupDc" class="fis.pbcap.finex_common_addon.entity.GdProductGroup">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="gdProductGroupDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from GdProductGroup e where e.deletedBy is null order by e.groupCode]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+<!--        <collection id="glAccountsDc" class="fis.pbcap.finex_common_addon.entity.GlAccounts">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="glAccountsDl" readOnly="true">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from GlAccounts e where e.status='A' and e.isUseManualAccounting = 'Y' and e.deletedBy is null and e.accountCode not in (select f.parentAccount from GlAccounts f where f.deletedBy is null and e.accountCode=f.parentAccount) order by e.accountCode]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+    </data>
+<!--    <facets>-->
+<!--        <dataLoadCoordinator auto="true"/>-->
+<!--    </facets>-->
+<!--    <actions>-->
+<!--        <action id="saveAction" type="detail_saveClose"/>-->
+<!--        <action id="closeAction" type="detail_close"/>-->
+<!--    </actions>-->
+    <layout height="auto" padding="true">
+        <button id="createBtn"  invoke="onCreateBtnClick"  text="Create3"/>
+
+        <comboBox id="searchCombo"
+                  allowCustomValue="false"
+                  placeholder="Type to search..."/>
+
+        <vbox padding="false" margin="false">
+            <div classNames="information-box-container-collapse">
+                <div classNames="information-box-title-collapse with-collapse">
+                    <span text="Thông tin xuất hóa đơn"/>
+                </div>
+                <dataGrid id="glCashAccountingMapDataGrid"
+                          dataContainer="glCashAccountingMapDc"
+                          width="100%"
+                          height="100%"
+                          allRowsVisible="true"
+                          minHeight="6em"
+                          editorBuffered="true">
+<!--                    <actions>-->
+<!--                        <action id="create" type="list_create"/>-->
+<!--                    </actions>-->
+<!--                    <actions>-->
+<!--                        <action id="createInvoiceManual" type="list_read">-->
+<!--                            <properties>-->
+<!--                                <property name="openMode" value="DIALOG"/>-->
+<!--                                <property name="viewId" value="GlInvoiceInfoManual.detail"/>-->
+<!--                            </properties>-->
+<!--                        </action>-->
+<!--                        <action id="edit" type="list_edit">-->
+<!--                            <properties>-->
+<!--                                <property name="openMode" value="DIALOG"/>-->
+<!--                                <property name="viewId" value="GlInvoiceInfoManual.detail"/>-->
+<!--                            </properties>-->
+<!--                        </action>-->
+<!--                    </actions>-->
+                    <columns resizable="true">
+                        <editorActionsColumn width="8em" flexGrow="0">
+                            <editButton icon="PENCIL"/>
+                            <saveButton icon="CHECK" themeNames="success"/>
+
+                        </editorActionsColumn>
+                        <column property="supplierId" autoWidth="true" header="Mã khách hàng" editable="true"/>
+                        <column property="supplierName" autoWidth="true" header="Tên khách hàng" editable="true"/>
+                        <column property="branchCode" autoWidth="true" header="Chi nhánh" editable="true"/>
+<!--                        <column property="supplierTaxCode" autoWidth="true" header="Mã số thuế"/>-->
+
+                        <!--                    <column property="description" autoWidth="true"/>-->
+
+                        <!--                    <column property="isVat" autoWidth="true" header="Xuất hóa đơn"/>-->
+                    </columns>
+                </dataGrid>
+            </div>
+        </vbox>
+    </layout>
+</view>

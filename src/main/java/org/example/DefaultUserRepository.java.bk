@@ -1,0 +1,37 @@
+package org.example;
+
+import io.jmix.core.security.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class DefaultUserRepository implements UserRepository {
+
+    @Override
+    public UserDetails getSystemUser() {
+        // Create a default system user with all permissions
+        User user = new User("defaultSystemUser", "defaultPassword", true);
+
+        return user;
+    }
+
+    @Override
+    public UserDetails getAnonymousUser() {
+        return null;
+    }
+
+    @Override
+    public List<? extends UserDetails> getByUsernameLike(String substring) {
+        return List.of();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = new User("defaultSystemUser", "defaultPassword", true);
+
+        return user;
+    }
+}
